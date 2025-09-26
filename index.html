@@ -7,57 +7,68 @@
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
   <style>
     :root {
-      --bg-color: #ffffff;
-      --accent-color: #007C58; /* Swift corporate green */
-      --text-color: #1a1a1a;
-      --muted-text: #5f6368;
-      --border-color: #e0e0e0;
-      --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.08);
-      --chat-color-primary: #007C58;
-      --chat-color-primary-shade-50: #006C4D;
-      --chat-color-primary-shade-100: #005C3D;
-      --chat-color-secondary: #20b69e;
-      --chat-color-secondary-shade-50: #1ca08a;
-      --chat-color-white: #ffffff;
-      --chat-color-light: #f2f4f8;
-      --chat-color-light-shade-50: #e6e9f1;
-      --chat-color-light-shade-100: #c2c5cc;
-      --chat-color-medium: #d2d4d9;
-      --chat-color-dark: #101330;
-      --chat-color-disabled: #777980;
-      --chat-color-typing: #404040;
-      --chat-spacing: 1rem;
-      --chat-border-radius: 0.25rem;
-      --chat-transition-duration: 0.15s;
-      --chat-window-width: 400px;
-      --chat-window-height: 600px;
-      --chat-header-height: auto;
-      --chat-header-padding: var(--chat-spacing);
-      --chat-header-background: var(--chat-color-dark);
-      --chat-header-color: var(--chat-color-light);
-      --chat-header-border-top: none;
-      --chat-header-border-bottom: none;
-      --chat-heading-font-size: 2em;
-      --chat-subtitle-font-size: inherit;
-      --chat-subtitle-line-height: 1.8;
-      --chat-textarea-height: 50px;
-      --chat-message-font-size: 1rem;
-      --chat-message-padding: var(--chat-spacing);
-      --chat-message-border-radius: var(--chat-border-radius);
-      --chat-message-line-height: 1.8;
-      --chat-message-bot-background: var(--chat-color-white);
-      --chat-message-bot-color: var(--chat-color-dark);
-      --chat-message-bot-border: none;
-      --chat-message-user-background: var(--chat-color-secondary);
-      --chat-message-user-color: var(--chat-color-white);
-      --chat-message-user-border: none;
-      --chat-message-pre-background: rgba(0, 0, 0, 0.05);
-      --chat-toggle-background: var(--chat-color-primary);
-      --chat-toggle-hover-background: var(--chat-color-primary-shade-50);
-      --chat-toggle-active-background: var(--chat-color-primary-shade-100);
-      --chat-toggle-color: var(--chat-color-white);
-      --chat-toggle-size: 64px;
-    }
+  /* Primary colors */
+  --chat--color-primary: #007C58;              /* Swift corporate green */
+  --chat--color-primary-shade-50: #006b4c;
+  --chat--color-primary-shade-100: #005f44;
+
+  /* Secondary colors */
+  --chat--color-secondary: #20b69e;           /* subtle complementary green */
+  --chat--color-secondary-shade-50: #1aa08a;
+
+  /* Neutrals */
+  --chat--color-white: #ffffff;
+  --chat--color-light: #33FFCC;               /* very light background */
+  --chat--color-light-shade-50: #e6ece6;
+  --chat--color-light-shade-100: #cfd7cf;
+  --chat--color-medium: #d2d4d9;
+  --chat--color-dark: #101330;                /* header/dark text */
+  --chat--color-disabled: #777980;
+  --chat--color-typing: #404040;
+
+  /* Spacing & sizes */
+  --chat--spacing: 1rem;
+  --chat--border-radius: 0.5rem;              /* slightly rounder for modern look */
+  --chat--transition-duration: 0.15s;
+
+  --chat--window--width: 400px;
+  --chat--window--height: 600px;
+
+  /* Header */
+  --chat--header-height: auto;
+  --chat--header--padding: var(--chat--spacing);
+  --chat--header--background: var(--chat--color-primary);
+  --chat--header--color: var(--chat--color-white);
+  --chat--header--border-top: none;
+  --chat--header--border-bottom: none;
+  --chat--heading--font-size: 1.8em;
+  --chat--subtitle--font-size: inherit;
+  --chat--subtitle--line-height: 1.8;
+
+  /* Text area */
+  --chat--textarea--height: 50px;
+
+  /* Messages */
+  --chat--message--font-size: 1rem;
+  --chat--message--padding: var(--chat--spacing);
+  --chat--message--border-radius: var(--chat--border-radius);
+  --chat--message-line-height: 1.6;
+  --chat--message--bot--background: var(--chat--color-white);
+  --chat--message--bot--color: var(--chat--color-dark);
+  --chat--message--bot--border: none;
+  --chat--message--user--background: var(--chat--color-primary);
+  --chat--message--user--color: var(--chat--color-white);
+  --chat--message--user--border: none;
+  --chat--message--pre--background: rgba(0, 0, 0, 0.05);
+
+  /* Toggle button */
+  --chat--toggle--background: var(--chat--color-primary);
+  --chat--toggle--hover--background: var(--chat--color-primary-shade-50);
+  --chat--toggle--active--background: var(--chat--color-primary-shade-100);
+  --chat--toggle--color: var(--chat--color-dark);
+  --chat--toggle--size: 64px;
+}
+
 
     body {
       margin: 0;
@@ -160,26 +171,6 @@
       color: var(--muted-text);
       margin-top: 4rem;
     }
-
-    /* Mobile responsiveness */
-    @media (max-width: 768px) {
-      header {
-        padding: 1rem;
-      }
-
-      main {
-        padding: 0 1rem;
-      }
-
-      nav a {
-        font-size: 0.9rem;
-      }
-
-      #n8n-chat {
-        width: 100% !important;
-        height: auto !important;
-      }
-    }
   </style>
 </head>
 <body>
@@ -187,7 +178,7 @@
   <header>
     <h1>API Request Generator</h1>
     <nav>
-      <a href="#chat">Developer Chat</a>
+     <a href="#chat">Developer Chat</a>
     </nav>
   </header>
 
@@ -219,6 +210,7 @@
       i18n: {
         en: {
           title: 'API Assistant',
+          subtitle: "",
           footer: 'Powered by Swapnil Sabnis',
           getStarted: 'Start New Session',
           inputPlaceholder: 'Type your API question...',
@@ -229,3 +221,5 @@
   </script>
 </body>
 </html>
+
+
