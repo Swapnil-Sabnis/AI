@@ -63,20 +63,22 @@
       margin: 1.5rem 0;
       font-size: 0.95rem;
     }
-     .cta {
-      margin-top: 20px;
+    .chat-container {
+      margin: 2rem 0;
+      padding: 1rem;
+      background: #f9fdf9;
+      border: 1px solid #d0e6d0;
+      border-radius: 8px;
     }
-    .cta a {
-      display: inline-block;
-      padding: 12px 25px;
-      background: #0056b3;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
+    .chat-container h2 {
+      margin-top: 0;
     }
-    .cta a:hover {
-      background: #003f80;
+    iframe {
+      width: 100%;
+      height: 600px;
+      border: none;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
     }
     footer {
       background-color: var(--primary-color);
@@ -93,6 +95,9 @@
     <h1>SwiftRef API</h1>
     <nav>
       <a href="#overview">Overview</a>
+      <a href="#getting-started">Getting Started</a>
+      <a href="#go-live">Go Live</a>
+      <a href="#chat">Chat</a>
     </nav>
   </header>
 
@@ -107,17 +112,35 @@
         SwiftRef APIs provide financial institutions, corporates, and third-party service providers with automated data lookup services for real-time identification and validation of payments reference data.
       </p>
     </section>
-    <div class="cta">
-      <a href="https://primary-production-5980b.up.railway.app/webhook/0482aa23-2207-4383-a313-3113b36d0876/chat">API</a>
-    </div>
+
+    <section id="getting-started">
+      <h2>Getting Started & Sandbox</h2>
+      <ol>
+        <li>Create an app and select SwiftRef API.</li>
+        <li>Obtain sandbox credentials (for password grant type as applicable).</li>
+        <li>Use the Postman collection provided to test sample API calls.</li>
+      </ol>
+      <p>
+        Note: The sandbox environment behaves identically to live for testing. Be mindful of quota limits.
+      </p>
+    </section>
+
+    <section id="go-live">
+      <h2>Go Live</h2>
+      <p>
+        After testing, submit your SwiftRef API order to access the live environment. You’ll then create license credentials, configure access, and call the live APIs as documented.
+      </p>
+    </section>
+
+    <section id="chat" class="chat-container">
+      <h2>Developer Chat Assistance</h2>
+      <iframe src="https://primary-production-5980b.up.railway.app/webhook/0482aa23-2207-4383-a313-3113b36d0876/chat" title="n8n Chat"></iframe>
+    </section>
   </main>
 
   <footer>
-    &copy; Swapnil Sabnis
+    &copy; 2025 SwiftRef API Documentation
   </footer>
 
 </body>
 </html>
-
-
-
