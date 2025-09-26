@@ -8,68 +8,69 @@
   <style>
     :root {
       --bg-color: #ffffff;
-      --accent-color: #34c759; /* Apple green */
-      --text-color: #1d1d1f;
-      --muted-text: #6e6e73;
-      --border-color: #e5e5e7;
-      --shadow-light: 0 4px 12px rgba(0, 0, 0, 0.08);
+      --accent-color: #007C58; /* Swift corporate green */
+      --text-color: #1a1a1a;
+      --muted-text: #5f6368;
+      --border-color: #e0e0e0;
+      --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.08);
     }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-family: "Helvetica Neue", Arial, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
-      line-height: 1.6;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
     }
 
     header {
       position: sticky;
       top: 0;
-      background-color: rgba(255, 255, 255, 0.85);
-      backdrop-filter: blur(10px);
+      background-color: #fff;
       border-bottom: 1px solid var(--border-color);
-      padding: 1rem 3rem;
+      padding: 1.2rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
+      box-shadow: var(--shadow-light);
     }
 
     header h1 {
       margin: 0;
-      font-size: 1.6rem;
+      font-size: 1.8rem;
       font-weight: 600;
-      letter-spacing: -0.5px;
-      color: var(--text-color);
+      color: var(--accent-color);
+      letter-spacing: -0.3px;
     }
 
     nav a {
       margin-left: 2rem;
       text-decoration: none;
       color: var(--text-color);
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 500;
-      transition: color 0.2s ease;
+      transition: color 0.25s ease;
     }
     nav a:hover {
       color: var(--accent-color);
     }
 
     main {
-      max-width: 960px;
+      max-width: 1000px;
       margin: 3rem auto;
       padding: 0 1.5rem;
     }
 
     .note {
-      background: #f5f5f7;
-      border-radius: 12px;
+      background: #f9fdfb;
+      border: 1px solid #d2e8df;
+      border-left: 5px solid var(--accent-color);
+      border-radius: 8px;
       padding: 1.25rem 1.5rem;
-      font-size: 0.95rem;
+      font-size: 0.98rem;
       color: var(--muted-text);
-      box-shadow: var(--shadow-light);
       margin-bottom: 2rem;
     }
 
@@ -80,20 +81,31 @@
       font-size: 1.5rem;
       font-weight: 600;
       margin-bottom: 1rem;
-      letter-spacing: -0.3px;
+      color: var(--accent-color);
     }
     p {
       font-size: 1.05rem;
       color: var(--muted-text);
-      margin: 0.5rem 0;
+      margin: 0.5rem 0 1rem;
     }
 
     /* Chat widget container */
     #n8n-chat {
       margin-top: 2rem;
-      box-shadow: var(--shadow-light);
+      border: 1px solid var(--border-color);
       border-radius: 12px;
       overflow: hidden;
+      box-shadow: var(--shadow-light);
+    }
+
+    /* Custom chat header */
+    .n8n-chat-header {
+      background: var(--accent-color) !important;
+      color: #fff !important;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      letter-spacing: 0.2px;
     }
 
     footer {
@@ -112,7 +124,7 @@
     <h1>SwiftRef API</h1>
     <nav>
       <a href="#overview">Overview</a>
-      <a href="#chat">Chat</a>
+      <a href="#chat">Developer Chat</a>
     </nav>
   </header>
 
@@ -143,33 +155,27 @@
 
     createChat({
       webhookUrl: 'https://primary-production-5980b.up.railway.app/webhook/0482aa23-2207-4383-a313-3113b36d0876/chat',
-      webhookConfig: {
-		method: 'POST',
-		headers: {}
-	},
-	target: '#n8n-chat',
-	mode: 'window',
-	chatInputKey: 'chatInput',
-	chatSessionKey: 'sessionId',
-	loadPreviousSession: true,
-	metadata: {},
-	showWelcomeScreen: false,
-	defaultLanguage: 'en',
-	initialMessages: [
-		'Hi, which API request you would like to generator',
-	],
-	i18n: {
-		en: {
-			title: 'API Request Generator',
-			subtitle: "API developer tool",
-			footer: '',
-			getStarted: 'New Conversation',
-			inputPlaceholder: 'Type your question..',
-		},
-	},
-	enableStreaming: false,
-});
+      target: '#n8n-chat',
+      mode: 'window',
+      chatInputKey: 'chatInput',
+      chatSessionKey: 'sessionId',
+      loadPreviousSession: true,
+      showWelcomeScreen: false,
+      defaultLanguage: 'en',
+      initialMessages: [
+        '👋 Welcome! Which SwiftRef API request would you like to generate?'
+      ],
+      i18n: {
+        en: {
+          title: 'SwiftRef Assistant',
+          subtitle: "API Developer Tool",
+          footer: 'Powered by n8n',
+          getStarted: 'Start New Session',
+          inputPlaceholder: 'Type your API question...',
+        },
+      },
+      enableStreaming: false,
+    });
   </script>
 </body>
 </html>
-
