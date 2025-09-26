@@ -12,7 +12,7 @@
       --text-color: #1a1a1a;
       --muted-text: #5f6368;
       --border-color: #e0e0e0;
-      --shadow-light: 0 4px 16px rgba(0, 0, 0, 0.08);
+      --shadow-light: 0 6px 20px rgba(0, 0, 0, 0.12);
     }
 
     body {
@@ -41,24 +41,12 @@
       margin: 0;
       font-size: 1.8rem;
       font-weight: 600;
-      color: var(--accent-color);
+      color: var(--text-color); /* black title */
       letter-spacing: -0.3px;
     }
 
-    nav a {
-      margin-left: 2rem;
-      text-decoration: none;
-      color: var(--text-color);
-      font-size: 1rem;
-      font-weight: 500;
-      transition: color 0.25s ease;
-    }
-    nav a:hover {
-      color: var(--accent-color);
-    }
-
     main {
-      max-width: 1000px;
+      max-width: 900px;
       margin: 3rem auto;
       padding: 0 1.5rem;
     }
@@ -74,40 +62,6 @@
       margin-bottom: 2rem;
     }
 
-    section {
-      margin-bottom: 3rem;
-    }
-    h2 {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
-      color: var(--accent-color);
-    }
-    p {
-      font-size: 1.05rem;
-      color: var(--muted-text);
-      margin: 0.5rem 0 1rem;
-    }
-
-    /* Chat widget container */
-    #n8n-chat {
-      margin-top: 2rem;
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: var(--shadow-light);
-    }
-
-    /* Custom chat header */
-    .n8n-chat-header {
-      background: var(--accent-color) !important;
-      color: #fff !important;
-      font-weight: 600;
-      font-size: 1rem;
-      padding: 0.75rem 1rem;
-      letter-spacing: 0.2px;
-    }
-
     footer {
       border-top: 1px solid var(--border-color);
       padding: 2rem 1.5rem;
@@ -116,15 +70,91 @@
       color: var(--muted-text);
       margin-top: 4rem;
     }
+
+    /* Floating Chat Button */
+    #chat-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--accent-color);
+      color: #fff;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-light);
+      cursor: pointer;
+      transition: background 0.3s ease;
+      z-index: 1100;
+    }
+    #chat-button:hover {
+      background: #005f44;
+    }
+
+    #chat-button svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    /* Chat Popup */
+    #chat-popup {
+      position: fixed;
+      bottom: 85px;
+      right: 20px;
+      width: 360px;
+      max-height: 500px;
+      background: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      box-shadow: var(--shadow-light);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1200;
+      animation: fadeInUp 0.3s ease;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .chat-header {
+      background: var(--accent-color);
+      color: #fff;
+      padding: 0.8rem 1rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chat-header button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    #n8n-chat {
+      flex: 1;
+      height: 100%;
+    }
   </style>
 </head>
 <body>
 
   <header>
     <h1>API Request Generator</h1>
-    <nav>
-     <a href="#chat">Developer Chat</a>
-    </nav>
   </header>
 
   <main>
@@ -136,6 +166,23 @@
   <footer>
     &copy; 2025 Swapnil Sabnis
   </footer>
+
+  <!-- Floating Chat Button -->
+  <div id="chat-button" title="Chat with API Assistant">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M8 10h.01M12 10h.01M16 10h.01M21 12c0 4.418-4.03 8-9 8a9.77 9.77 0 01-4-.83L3 20l1.34-2.68A7.97 7.97 0 013 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+    </svg>
+  </div>
+
+  <!-- Chat Popup -->
+  <div id="chat-popup">
+    <div class="chat-header">
+      API Assistant
+      <button id="close-chat">&times;</button>
+    </div>
+    <div id="n8n-chat"></div>
+  </div>
 
   <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
@@ -150,7 +197,7 @@
       showWelcomeScreen: false,
       defaultLanguage: 'en',
       initialMessages: [
-        'Welcome! Which SwiftRef API request would you like to generate?'
+        '👋 Welcome! Which SwiftRef API request would you like to generate?'
       ],
       i18n: {
         en: {
@@ -163,8 +210,21 @@
       },
       enableStreaming: false,
     });
+
+    // Popup toggle logic
+    const chatBtn = document.getElementById('chat-button');
+    const chatPopup = document.getElementById('chat-popup');
+    const closeChat = document.getElementById('close-chat');
+
+    chatBtn.addEventListener('click', () => {
+      chatPopup.style.display = 'flex';
+      chatBtn.style.display = 'none';
+    });
+
+    closeChat.addEventListener('click', () => {
+      chatPopup.style.display = 'none';
+      chatBtn.style.display = 'flex';
+    });
   </script>
 </body>
 </html>
-
-
