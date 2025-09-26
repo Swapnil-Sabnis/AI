@@ -3,82 +3,194 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>n8n Chat Popup</title>
+  <title>SwiftRef API</title>
   <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
+    :root {
+  /* Primary colors */
+  --chat--color-primary: #007C58;              /* Swift corporate green */
+  --chat--color-primary-shade-50: #006b4c;
+  --chat--color-primary-shade-100: #005f44;
 
-    /* Floating Button */
-    #chat-button {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: #007C58;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      cursor: pointer;
-      z-index: 1000;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  /* Secondary colors */
+  --chat--color-secondary: #20b69e;           /* subtle complementary green */
+  --chat--color-secondary-shade-50: #1aa08a;
+
+  /* Neutrals */
+  --chat--color-white: #ffffff;
+  --chat--color-light: #f7f9f7;               /* very light background */
+  --chat--color-light-shade-50: #e6ece6;
+  --chat--color-light-shade-100: #cfd7cf;
+  --chat--color-medium: #d2d4d9;
+  --chat--color-dark: #101330;                /* header/dark text */
+  --chat--color-disabled: #777980;
+  --chat--color-typing: #404040;
+
+  /* Spacing & sizes */
+  --chat--spacing: 1rem;
+  --chat--border-radius: 0.5rem;              /* slightly rounder for modern look */
+  --chat--transition-duration: 0.15s;
+
+  --chat--window--width: 400px;
+  --chat--window--height: 600px;
+
+  /* Header */
+  --chat--header-height: auto;
+  --chat--header--padding: var(--chat--spacing);
+  --chat--header--background: var(--chat--color-primary);
+  --chat--header--color: var(--chat--color-white);
+  --chat--header--border-top: none;
+  --chat--header--border-bottom: none;
+  --chat--heading--font-size: 1.8em;
+  --chat--subtitle--font-size: inherit;
+  --chat--subtitle--line-height: 1.8;
+
+  /* Text area */
+  --chat--textarea--height: 50px;
+
+  /* Messages */
+  --chat--message--font-size: 1rem;
+  --chat--message--padding: var(--chat--spacing);
+  --chat--message--border-radius: var(--chat--border-radius);
+  --chat--message-line-height: 1.6;
+  --chat--message--bot--background: var(--chat--color-white);
+  --chat--message--bot--color: var(--chat--color-dark);
+  --chat--message--bot--border: none;
+  --chat--message--user--background: var(--chat--color-primary);
+  --chat--message--user--color: var(--chat--color-white);
+  --chat--message--user--border: none;
+  --chat--message--pre--background: rgba(0, 0, 0, 0.05);
+
+  /* Toggle button */
+  --chat--toggle--background: var(--chat--color-primary);
+  --chat--toggle--hover--background: var(--chat--color-primary-shade-50);
+  --chat--toggle--active--background: var(--chat--color-primary-shade-100);
+  --chat--toggle--color: var(--chat--color-white);
+  --chat--toggle--size: 64px;
+}
+
+
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Popup Box */
-    #chat-popup {
-      position: fixed;
-      bottom: 90px;
-      right: 20px;
-      width: 360px;
-      height: 500px;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-      display: none; /* hidden by default */
-      flex-direction: column;
-      overflow: hidden;
-      z-index: 2000;
-    }
-
-    .chat-header {
-      background: #007C58;
-      color: #fff;
-      padding: 10px;
-      font-weight: bold;
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #fff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.2rem 3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 1000;
+      box-shadow: var(--shadow-light);
     }
 
-    .chat-header button {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 20px;
-      cursor: pointer;
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--accent-color);
+      letter-spacing: -0.3px;
     }
 
+    nav a {
+      margin-left: 2rem;
+      text-decoration: none;
+      color: var(--text-color);
+      font-size: 1rem;
+      font-weight: 500;
+      transition: color 0.25s ease;
+    }
+    nav a:hover {
+      color: var(--accent-color);
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .note {
+      background: #f9fdfb;
+      border: 1px solid #d2e8df;
+      border-left: 5px solid var(--accent-color);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      font-size: 0.98rem;
+      color: var(--muted-text);
+      margin-bottom: 2rem;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--accent-color);
+    }
+    p {
+      font-size: 1.05rem;
+      color: var(--muted-text);
+      margin: 0.5rem 0 1rem;
+    }
+
+    /* Chat widget container */
     #n8n-chat {
-      flex: 1;
-      height: 100%;
+      margin-top: 2rem;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-light);
+    }
+
+    /* Custom chat header */
+    .n8n-chat-header {
+      background: var(--accent-color) !important;
+      color: #fff !important;
+      font-weight: 600;
+      font-size: 1rem;
+      padding: 0.75rem 1rem;
+      letter-spacing: 0.2px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border-color);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--muted-text);
+      margin-top: 4rem;
     }
   </style>
 </head>
 <body>
-  <!-- Floating Button -->
-  <div id="chat-button">💬</div>
 
-  <!-- Chat Popup -->
-  <div id="chat-popup">
-    <div class="chat-header">
-      API Assistant
-      <button id="close-chat">&times;</button>
+  <header>
+    <h1>API Request Generator</h1>
+    <nav>
+     <a href="#chat">Developer Chat</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="note">
+      <strong>Note:</strong> This page is for developer assistance and should be used as a reference for API implementation.
     </div>
-    <div id="n8n-chat"></div>
-  </div>
+  </main>
+
+  <footer>
+    &copy; 2025 Swapnil Sabnis
+  </footer>
 
   <script type="module">
     import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
@@ -86,23 +198,28 @@
     createChat({
       webhookUrl: 'https://primary-production-5980b.up.railway.app/webhook/0482aa23-2207-4383-a313-3113b36d0876/chat',
       target: '#n8n-chat',
-      mode: 'embedded',   // ✅ embed inside popup
+      mode: 'window',
+      chatInputKey: 'chatInput',
+      chatSessionKey: 'sessionId',
+      loadPreviousSession: true,
       showWelcomeScreen: false,
-      initialMessages: ['👋 Hi! How can I help you with the API?']
-    });
-
-    // Button toggle
-    const chatBtn = document.getElementById('chat-button');
-    const chatPopup = document.getElementById('chat-popup');
-    const closeBtn = document.getElementById('close-chat');
-
-    chatBtn.addEventListener('click', () => {
-      chatPopup.style.display = 'flex';
-    });
-
-    closeBtn.addEventListener('click', () => {
-      chatPopup.style.display = 'none';
+      defaultLanguage: 'en',
+      initialMessages: [
+        'Welcome! Which SwiftRef API request would you like to generate?'
+      ],
+      i18n: {
+        en: {
+          title: 'API Assistant',
+          subtitle: "",
+          footer: 'Powered by Swapnil Sabnis',
+          getStarted: 'Start New Session',
+          inputPlaceholder: 'Type your API question...',
+        },
+      },
+      enableStreaming: false,
     });
   </script>
 </body>
 </html>
+
+
