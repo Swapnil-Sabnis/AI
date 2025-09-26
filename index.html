@@ -143,13 +143,33 @@
 
     createChat({
       webhookUrl: 'https://primary-production-5980b.up.railway.app/webhook/0482aa23-2207-4383-a313-3113b36d0876/chat',
-      target: '#n8n-chat',
-      mode: 'fullscreen', // can also use 'embedded' for inline
-      theme: {
-        primary: '#34c759',
-        background: '#ffffff',
-      },
-    });
+      webhookConfig: {
+		method: 'POST',
+		headers: {}
+	},
+	target: '#n8n-chat',
+	mode: 'window',
+	chatInputKey: 'chatInput',
+	chatSessionKey: 'sessionId',
+	loadPreviousSession: true,
+	metadata: {},
+	showWelcomeScreen: false,
+	defaultLanguage: 'en',
+	initialMessages: [
+		'Hi, which API request you would like to generator',
+	],
+	i18n: {
+		en: {
+			title: 'API Request Generator',
+			subtitle: "API developer tool",
+			footer: '',
+			getStarted: 'New Conversation',
+			inputPlaceholder: 'Type your question..',
+		},
+	},
+	enableStreaming: false,
+});
   </script>
 </body>
 </html>
+
