@@ -88,6 +88,14 @@
       border-top: 1px solid #ccc;
     }
   </style>
+  <link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
+<script type="module">
+	import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
+
+	createChat({
+		webhookUrl: 'https://primary-production-5980b.up.railway.app/webhook/0482aa23-2207-4383-a313-3113b36d0876/chat'
+	});
+</script>
 </head>
 <body>
 
@@ -144,4 +152,5 @@
 
 </body>
 </html>
+
 
