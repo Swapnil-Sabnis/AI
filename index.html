@@ -5,18 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SwiftRef API</title>
   <style>
-    /* Colors */
     :root {
       --bg-color: #ffffff;
       --primary-color: #e8f5e9; /* very light green */
-      --accent-color: #66bb6a; /* a stronger green for accents/links */
+      --accent-color: #66bb6a; /* stronger green */
       --text-color: #333333;
       --heading-color: #2e7d32;
     }
 
     body {
       margin: 0;
-      font-family: system-ui, -apple-system, “Segoe UI”, Roboto, Arial, sans-serif;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
       background-color: var(--bg-color);
       color: var(--text-color);
       line-height: 1.6;
@@ -57,6 +56,13 @@
     p {
       margin: 0.75rem 0;
     }
+    .note {
+      background-color: #f1f8f4;
+      border-left: 4px solid var(--accent-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      font-size: 0.95rem;
+    }
     footer {
       background-color: var(--primary-color);
       padding: 1rem 2rem;
@@ -78,6 +84,10 @@
   </header>
 
   <main>
+    <div class="note">
+      <strong>Note:</strong> This page is for developer assistance and should be used as a reference for API implementation.
+    </div>
+
     <section id="overview">
       <h2>Overview</h2>
       <p>
@@ -100,7 +110,7 @@
     <section id="go-live">
       <h2>Go Live</h2>
       <p>
-        After testing, submit your SwiftRef API order to access the live environment. You’ll then create license credentials, configure access, and call the live APIs as documented.
+        After testing, submit your SwiftRef API order to access the live environment. Youâ€™ll then create license credentials, configure access, and call the live APIs as documented.
       </p>
     </section>
   </main>
