@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SwiftRef API</title>
+  <style>
+    /* Colors */
+    :root {
+      --bg-color: #ffffff;
+      --primary-color: #e8f5e9; /* very light green */
+      --accent-color: #66bb6a; /* a stronger green for accents/links */
+      --text-color: #333333;
+      --heading-color: #2e7d32;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, “Segoe UI”, Roboto, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+    header {
+      background-color: var(--primary-color);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #ccc;
+    }
+    header h1 {
+      margin: 0;
+      color: var(--heading-color);
+      font-size: 1.8rem;
+    }
+    nav {
+      margin-top: 0.5rem;
+    }
+    nav a {
+      color: var(--accent-color);
+      text-decoration: none;
+      margin-right: 1rem;
+      font-weight: 500;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    main {
+      padding: 2rem;
+    }
+    section {
+      margin-bottom: 2rem;
+    }
+    h2 {
+      color: var(--heading-color);
+      margin-top: 1.5rem;
+    }
+    p {
+      margin: 0.75rem 0;
+    }
+    footer {
+      background-color: var(--primary-color);
+      padding: 1rem 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      border-top: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>SwiftRef API</h1>
+    <nav>
+      <a href="#overview">Overview</a>
+      <a href="#getting-started">Getting Started</a>
+      <a href="#go-live">Go Live</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>
+        SwiftRef APIs provide financial institutions, corporates, and third-party service providers with automated data lookup services for real-time identification and validation of payments reference data.
+      </p>
+    </section>
+
+    <section id="getting-started">
+      <h2>Getting Started & Sandbox</h2>
+      <ol>
+        <li>Create an app and select SwiftRef API.</li>
+        <li>Obtain sandbox credentials (for password grant type as applicable).</li>
+        <li>Use the Postman collection provided to test sample API calls.</li>
+      </ol>
+      <p>
+        Note: The sandbox environment behaves identically to live for testing. Be mindful of quota limits.
+      </p>
+    </section>
+
+    <section id="go-live">
+      <h2>Go Live</h2>
+      <p>
+        After testing, submit your SwiftRef API order to access the live environment. You’ll then create license credentials, configure access, and call the live APIs as documented.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 SwiftRef API Documentation
+  </footer>
+
+</body>
+</html>
